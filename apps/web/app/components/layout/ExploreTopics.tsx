@@ -1309,24 +1309,27 @@ const ExploreTopics = () => {
       </div>
 
       {/* SEAMLESS CLOUD TRANSITION */}
-      <div className="w-full relative h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72 overflow-hidden bg-white -mt-8 sm:-mt-10 md:-mt-12 lg:-mt-14 xl:-mt-16">
+      <div className="w-full relative h-28 sm:h-36 md:h-44 lg:h-56 xl:h-64 overflow-hidden bg-white -mt-12 sm:-mt-14 md:-mt-16 lg:-mt-20 xl:-mt-24">
         {/* Text Overlay */}
         <div className="absolute inset-0 z-20 flex items-center justify-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 text-center px-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-800 text-center px-4">
             IMPROVE YOUR LEARNING CURVE
           </h2>
         </div>
-
         {/* Single Cloud Image - Full Width */}
         <img
           src="/images/Pencil-Shadow.png"
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
           style={{
-            filter: "grayscale(10%) brightness(0.75) contrast(1.8)",
-            opacity: 0.8,
-            mixBlendMode: "multiply",
+            filter: "grayscale(0%) brightness(0.95) contrast(1.2)",
+            opacity: 1,
+            mixBlendMode: "darken",
             objectPosition: "center 30%",
+            imageRendering: "-webkit-optimize-contrast",
+            WebkitFontSmoothing: "antialiased",
+            backfaceVisibility: "hidden",
+            transform: "translateZ(0)",
           }}
         />
         {/* Seamless Gradient Blending Overlays */}
@@ -1334,36 +1337,36 @@ const ExploreTopics = () => {
         <div
           className="absolute top-0 left-0 right-0 z-10"
           style={{
-            height: "45%",
+            height: "40%",
             background:
-              "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 35%, rgba(255,255,255,0) 100%)",
           }}
         />
         {/* Bottom gradient - fade to white below */}
         <div
           className="absolute bottom-0 left-0 right-0 z-10"
           style={{
-            height: "45%",
+            height: "40%",
             background:
-              "linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.6) 35%, rgba(255,255,255,0) 100%)",
           }}
         />
         {/* Left gradient - soft edge */}
         <div
           className="absolute top-0 bottom-0 left-0 z-10"
           style={{
-            width: "10%",
+            width: "8%",
             background:
-              "linear-gradient(to right, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(to right, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%)",
           }}
         />
         {/* Right gradient - soft edge */}
         <div
           className="absolute top-0 bottom-0 right-0 z-10"
           style={{
-            width: "10%",
+            width: "8%",
             background:
-              "linear-gradient(to left, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%)",
+              "linear-gradient(to left, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%)",
           }}
         />
       </div>
