@@ -1295,7 +1295,7 @@ const ExploreTopics = () => {
         <div className="text-center relative z-20 pb-8 mt-10 md:mt-14 lg:mt-16">
           <button
             onClick={handleExploreMore}
-            className="px-6 py-2.5 text-sm md:text-base font-bold text-white rounded-lg shadow-md relative overflow-hidden border gradient-wave transition-transform min-w-[160px] hover:scale-105"
+            className="px-6 py-2.5 text-sm md:text-base font-bold text-white rounded-lg shadow-md relative overflow-hidden border gradient-wave transition-transform min-w-[160px]"
             style={{
               backgroundImage:
                 "linear-gradient(90deg, #7a12fa, #b614ef, #7a12fa)",
