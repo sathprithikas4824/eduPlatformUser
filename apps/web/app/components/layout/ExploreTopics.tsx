@@ -1310,6 +1310,13 @@ const ExploreTopics = () => {
 
       {/* SEAMLESS CLOUD TRANSITION */}
       <div className="w-full relative h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72 overflow-hidden bg-white -mt-8 sm:-mt-10 md:-mt-12 lg:-mt-14 xl:-mt-16">
+        {/* Text Overlay */}
+        <div className="absolute inset-0 z-20 flex items-center justify-center">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 text-center px-4">
+            IMPROVE YOUR LEARNING CURVE
+          </h2>
+        </div>
+
         {/* Single Cloud Image - Full Width */}
         <img
           src="/images/Pencil-Shadow.png"
@@ -1322,15 +1329,8 @@ const ExploreTopics = () => {
             objectPosition: "center 30%",
           }}
         />
-
-        {/* Responsive Text Overlay */}
-        <div className="absolute inset-0 z-20 flex items-start justify-center pt-4 sm:pt-6 md:pt-8 lg:pt-10 xl:pt-12">
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-800 text-center px-4">
-            IMPROVE YOUR LEARNING CURVE
-          </h2>
-        </div>
-
         {/* Seamless Gradient Blending Overlays */}
+        {/* Top gradient - fade to white above */}
         <div
           className="absolute top-0 left-0 right-0 z-10"
           style={{
@@ -1339,7 +1339,7 @@ const ExploreTopics = () => {
               "linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 100%)",
           }}
         />
-
+        {/* Bottom gradient - fade to white below */}
         <div
           className="absolute bottom-0 left-0 right-0 z-10"
           style={{
@@ -1348,7 +1348,7 @@ const ExploreTopics = () => {
               "linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0) 100%)",
           }}
         />
-
+        {/* Left gradient - soft edge */}
         <div
           className="absolute top-0 bottom-0 left-0 z-10"
           style={{
@@ -1357,7 +1357,7 @@ const ExploreTopics = () => {
               "linear-gradient(to right, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 100%)",
           }}
         />
-
+        {/* Right gradient - soft edge */}
         <div
           className="absolute top-0 bottom-0 right-0 z-10"
           style={{
