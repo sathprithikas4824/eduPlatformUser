@@ -24,132 +24,113 @@ const ModulesSection: React.FC = () => {
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollContainerRef.current) {
-      const cardWidth = 320;
-      const gap = 24;
-      const cardsToScroll = 3;
-      const scrollAmount = (cardWidth + gap) * cardsToScroll;
+      const container = scrollContainerRef.current;
+      const card = container.firstElementChild as HTMLElement;
+      if (!card) return;
       
-      const newScrollLeft = scrollContainerRef.current.scrollLeft + 
-        (direction === 'left' ? -scrollAmount : scrollAmount);
-      
-      scrollContainerRef.current.scrollTo({
-        left: newScrollLeft,
+      const cardWidth = card.offsetWidth;
+      const gap = 16; 
+
+      let cardsToScroll = 1;
+      if (window.innerWidth >= 1024) cardsToScroll = 3;
+      else if (window.innerWidth >= 768) cardsToScroll = 2;
+
+      const scrollDistance = (cardWidth + gap) * cardsToScroll; 
+
+      container.scrollTo({
+        left: direction === 'left' 
+          ? container.scrollLeft - scrollDistance 
+          : container.scrollLeft + scrollDistance,
         behavior: 'smooth'
       });
     }
   };
 
   return (
-    <div className="w-full bg-white py-16 px-4">
+    // Reduced py-16 to py-8 for less space at the top/bottom
+    <div className="w-full bg-white py-8 px-4">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <h2 className="jakarta-font text-5xl font-bold text-center mb-16">
-          Modules <span className="text-blue-500">Available</span>
+        {/* Reduced mb-16 to mb-6 for tighter gap between title and cards */}
+        <h2 className="jakarta-font text-3xl md:text-5xl font-bold text-center mb-8 text-gray-900">
+          Modules <span className="text-purple-600">Available</span>
         </h2>
 
-        {/* Carousel Container */}
-        <div className="relative flex items-center gap-8">
-          {/* Left Arrow */}
+        <div className="flex items-center justify-center gap-2 md:gap-4">
           <button
             onClick={() => scroll('left')}
-            className="flex-shrink-0 bg-white hover:bg-gray-50 border-2 border-gray-300 rounded-full p-3 transition-all duration-200 hover:scale-110 shadow-sm"
+            className="z-10 flex-shrink-0 bg-white rounded-full p-2 shadow-md hover:bg-gray-50 transition-all border border-gray-200 active:scale-95"
             aria-label="Scroll left"
           >
-            <span className="w-5 h-5 text-gray-700 block">
-              <ArrowLeft />
-            </span>
+            <ArrowLeft/>
           </button>
 
-          {/* Modules Container */}
           <div
             ref={scrollContainerRef}
-            className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth"
+            className="flex gap-4 overflow-x-hidden scroll-smooth p-1 snap-x snap-mandatory"
             style={{ 
-              scrollbarWidth: 'none', 
-              msOverflowStyle: 'none',
-              maxWidth: 'calc(320px * 3 + 24px * 2)'
+              width: '100%',
+              WebkitOverflowScrolling: 'touch'
             }}
           >
             {modules.map((module) => (
               <div
                 key={module.id}
-                className="flex-shrink-0 bg-white border-2 border-gray-400 rounded-2xl p-3"
-                style={{ width: '320px' }}
+                className="flex-shrink-0 group flex items-center gap-3 snap-start rounded-2xl border backdrop-blur-md cursor-pointer transition-all duration-300 hover:!border-[#7612fa66] p-2 
+                           w-full md:w-[calc((50%)-8px)] lg:w-[calc((33.333%)-10.6px)]"
+                style={{ 
+                    backgroundColor: "rgba(255, 255, 255, 0.95)",
+                    borderColor: "rgba(140, 140, 170, 0.4)",
+                    boxShadow: "0 2px 4px 0 rgba(124, 58, 237, 0.06)",
+                }} 
               >
-                {/* Card Content - Horizontal Layout */}
-                <div className="flex gap-3">
-                  {/* Left Side - Image Placeholder */}
-                  <div className="flex-shrink-0 w-28 h-20 bg-gradient-to-br from-gray-300 to-gray-400 rounded-xl"></div>
+                <div className="w-24 h-16 md:w-32 md:h-20 bg-[#A3A3A3] rounded-lg border border-gray-600 flex-shrink-0"></div>
 
-                  {/* Right Side - Content */}
-                  <div className="flex-1 flex flex-col justify-between py-1">
-                    {/* Title */}
-                    <h3 className="jakarta-font text-sm font-semibold text-gray-900 leading-tight">
-                      {module.title}
-                    </h3>
+                {/* h-full and py-0.5 for tighter internal vertical spacing */}
+                <div className="flex-1 flex flex-col justify-between h-16 md:h-20 py-0.5">
+                  <h3 className="jakarta-font text-[12px] md:text-[13px] font-bold text-gray-900 leading-tight">
+                    {module.title}
+                  </h3>
 
-                    {/* Bottom Section */}
-                    <div className="flex items-center justify-between gap-2">
-                      {/* Progress */}
-                      <div className="flex items-center gap-1.5">
-                        <div className="relative w-3.5 h-3.5">
-                          <svg className="w-3.5 h-3.5 transform -rotate-90">
-                            <circle
-                              cx="7"
-                              cy="7"
-                              r="6"
-                              stroke="#D1D5DB"
-                              strokeWidth="2"
-                              fill="none"
-                            />
-                            <circle
-                              cx="7"
-                              cy="7"
-                              r="6"
-                              stroke="#3B82F6"
-                              strokeWidth="2"
-                              fill="none"
-                              strokeDasharray={`${2 * Math.PI * 6}`}
-                              strokeDashoffset={`${2 * Math.PI * 6 * (1 - module.completionPercentage / 100)}`}
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </div>
-                        <span className="jakarta-font text-xs font-medium text-gray-600 whitespace-nowrap">
-                          {module.completionPercentage}% Completed
-                        </span>
+                  <div className="flex items-center justify-between mt-auto">
+                    <div className="flex items-center gap-1">
+                      <div className="relative w-3 h-3">
+                        <svg className="w-3 h-3 transform -rotate-90">
+                          <circle cx="6" cy="6" r="5" stroke="#9CA3AF" strokeWidth="1.5" fill="none" />
+                          <circle
+                            cx="6"
+                            cy="6"
+                            r="5"
+                            stroke="#3B82F6"
+                            strokeWidth="1.5"
+                            fill="none"
+                            strokeDasharray={`${2 * Math.PI * 5}`}
+                            strokeDashoffset={`${2 * Math.PI * 5 * (1 - module.completionPercentage / 100)}`}
+                          />
+                        </svg>
                       </div>
-
-                      {/* View Button */}
-                      <button className="jakarta-font bg-gray-900 hover:bg-gray-800 text-white text-xs font-medium px-4 py-1 rounded-md transition-all duration-200 hover:scale-105 whitespace-nowrap">
-                        View
-                      </button>
+                      <span className="text-[7px] font-bold text-gray-700 whitespace-nowrap">
+                        {module.completionPercentage}% Completed
+                      </span>
                     </div>
+
+                    <button className="bg-black text-white text-[9px] font-bold px-3 py-1 rounded shadow-sm hover:bg-gray-800 transition-colors">
+                      View
+                    </button>
                   </div>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Right Arrow */}
           <button
             onClick={() => scroll('right')}
-            className="flex-shrink-0 bg-white hover:bg-gray-50 border-2 border-gray-300 rounded-full p-3 transition-all duration-200 hover:scale-110 shadow-sm"
+            className="z-10 flex-shrink-0 bg-white rounded-full p-2 shadow-md hover:bg-gray-50 transition-all border border-gray-200 active:scale-95"
             aria-label="Scroll right"
           >
-            <span className="w-5 h-5 text-gray-700 block">
-              <ArrowRight />
-            </span>
+            <ArrowRight/>
           </button>
         </div>
       </div>
-
-      {/* Hide scrollbar styles */}
-      <style jsx>{`
-        .scrollbar-hide::-webkit-scrollbar {
-          display: none;
-        }
-      `}</style>
     </div>
   );
 };
