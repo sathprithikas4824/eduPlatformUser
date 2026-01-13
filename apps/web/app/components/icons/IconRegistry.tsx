@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Icon, IconProps } from "./Icon";
 
 import VisiblePng from "./svg/HeroSection/Visible.png";
+import PenEditPng from "./svg/HeroSection/PenEdit.png";
 /**
  * Icon Registry - All Streamline icons organized by category
  *
@@ -569,6 +570,34 @@ export const VisibleIcon: React.FC<IconProps> = (props) => {
   );
 };
 
+export const PenEditIcon: React.FC<IconProps> = (props) => {
+  const size = props.size || 24;
+
+  return (
+    <div 
+      className={props.className}
+      style={{ 
+        width: size, 
+        height: size, 
+        position: 'relative',
+        display: 'inline-block',
+        filter: 'grayscale(100%)',
+        opacity: props.opacity || 1
+      }}
+    >
+      <Image
+        src={PenEditPng}
+        alt="Pen Edit Icon"
+        fill
+        sizes={`${size}px`}
+        style={{ objectFit: 'contain' }}
+        priority={false}
+      />
+    </div>
+  );
+};
+
+
 // ==================== EXPORT ALL ====================
 
 export const Icons = {
@@ -604,6 +633,7 @@ export const Icons = {
   Bell: BellIcon,
   Settings: SettingsIcon,
   Visible: VisibleIcon,
+  PenEdit: PenEditIcon,
 
   // Financial
   Wallet: WalletIcon,

@@ -2,6 +2,7 @@ import TopBar from "./components/layout/TopBar";
 import MainNavbar from "./components/layout/MainNavBar";
 import HeroSection from "./components/layout/HeroSection";
 import ExploreTopics from "./components/layout/ExploreTopics";
+import Content from "./components/moduleFirstPage/Content";
 
 export default function Page() {
   return (
@@ -10,18 +11,20 @@ export default function Page() {
       style={{ overflow: 'visible' }}
     >
       {/* TOP BAR */}
-      <div className="relative z-20">
+      {/* <div className="relative z-20">
         <TopBar />
-      </div>
+      </div> */}
 
       {/* MAIN NAVBAR*/}
-      <MainNavbar />
+      {/* <MainNavbar /> */}
 
       {/* HERO SECTION */}
-      <HeroSection />
+      {/* <HeroSection /> */}
 
       {/* EXPLORE SECTION */}
-      <ExploreTopics/>
+      {/* <ExploreTopics/> */}
+
+      <Content/>
     </div>
   );
 }

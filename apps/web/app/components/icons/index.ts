@@ -39,6 +39,7 @@ export {
   BellIcon,
   SettingsIcon,
   VisibleIcon,
+  PenEditIcon,
   // Financial
   WalletIcon,
   CreditCardIcon,

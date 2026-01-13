@@ -7,6 +7,8 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
   className?: string;
   strokeWidth?: number | string;
   children?: React.ReactNode;
+  grayscale?: boolean;    // <-- ADD THIS
+  opacity?: number;  
 }
 
 /**
