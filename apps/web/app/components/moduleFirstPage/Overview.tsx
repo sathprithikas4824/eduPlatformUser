@@ -25,7 +25,7 @@ interface Module {
 }
 
 const BACKEND_URL =
-  process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3000";
+  process.env.NEXT_PUBLIC_BACKEND_URL || "https://eduplatformuser-1.onrender.com";
 const MODULE_ID = 17; // Module ID for AI content
 
 const Overview: React.FC = () => {
