@@ -175,19 +175,24 @@ export default function HeroSection() {
           padding: 0 1rem;
         }
         
-        .heading-intro-to {
-          display: block;
+        .heading-main {
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: center;
+          justify-content: center;
+          gap: 0.5rem;
+          line-height: 1.2;
+          white-space: nowrap;
+        }
+        
+        .heading-intro {
           font-weight: 700;
           color: #111827;
-          line-height: 1.2;
-          text-align: center;
         }
         
         .heading-ai-wrapper {
           position: relative;
           display: inline-block;
-          text-align: center;
-          width: 100%;
         }
         
         .heading-ai {
@@ -195,8 +200,7 @@ export default function HeroSection() {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          line-height: 1.1;
-          display: block;
+          font-weight: 700;
         }
         
         .swash-underline {
@@ -213,29 +217,32 @@ export default function HeroSection() {
         /* MOBILE VIEW (≤640px) */
         @media (max-width: 640px) {
           .heading-container {
-            padding: 0 1rem;
+            padding: 0 0.5rem;
             margin-bottom: 1.5rem;
           }
           
-          .heading-intro-to {
-            font-size: 24px;
-            margin-bottom: 4px;
+          .heading-main {
+            flex-direction: column;
+            gap: 0.25rem;
+            white-space: normal;
+          }
+          
+          .heading-intro {
+            font-size: 20px;
           }
           
           .heading-ai-wrapper {
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
           }
           
           .heading-ai {
-            font-size: 30px;
-            padding: 0 0.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 20px;
           }
           
           .swash-underline {
-            font-size: 55px;
-            bottom: -38px;
-            transform: translateX(-50%) scaleX(3);
+            font-size: 60px;
+            bottom: -40px;
+            transform: translateX(-50%) scaleX(2.8);
           }
           
           /* Description text responsive */
@@ -350,35 +357,37 @@ export default function HeroSection() {
           
           /* Heading responsive for tablet */
           .heading-container {
-            padding: 0 2rem;
+            padding: 0 1.5rem;
             margin-bottom: 2rem;
           }
           
-          .heading-intro-to {
-            font-size: 34px;
-            margin-bottom: 6px;
+          .heading-main {
+            gap: 0.4rem;
+          }
+          
+          .heading-intro {
+            font-size: 28px;
           }
           
           .heading-ai-wrapper {
-            margin-bottom: 2.5rem;
+            margin-bottom: -0.25rem;
           }
           
           .heading-ai {
-            font-size: 40px;
-            margin-bottom: 0.75rem;
+            font-size: 32px;
           }
           
           .swash-underline {
-            font-size: 100px;
-            bottom: -72px;
-            transform: translateX(-50%) scaleX(2.8);
+            font-size: 110px;
+            bottom: -80px;
+            transform: translateX(-50%) scaleX(2.6);
           }
           
           /* Description text responsive */
           .description-text {
             font-size: 1rem;
             padding: 0 2rem;
-            margin-top: 0;
+            margin-top: 1.5rem;
             margin-bottom: 1.5rem;
             line-height: 1.65;
           }
@@ -417,29 +426,31 @@ export default function HeroSection() {
             margin-bottom: 2.5rem;
           }
           
-          .heading-intro-to {
+          .heading-main {
+            gap: 0.5rem;
+          }
+          
+          .heading-intro {
             font-size: 48px;
-            margin-bottom: 8px;
           }
           
           .heading-ai-wrapper {
-            margin-bottom: 3.5rem;
+            margin-bottom: -1rem;
           }
-          
+        
           .heading-ai {
             font-size: 54px;
-            margin-bottom: 1rem;
           }
           
           .swash-underline {
             font-size: 200px;
-            bottom: -150px;
+            bottom: -130px;
             transform: translateX(-50%) scaleX(2.5);
           }
           
           .description-text {
             font-size: 1.125rem;
-            margin-top: 0;
+            margin-top: 2rem;
             margin-bottom: 1.75rem;
             line-height: 1.75;
             padding: 0 2rem;
@@ -551,21 +562,21 @@ export default function HeroSection() {
         <div className="pt-6 pb-6 sm:pt-8 sm:pb-8 lg:pt-10 lg:pb-10">
           {/* Heading Section */}
           <div className="text-center max-w-4xl mx-auto animate-fadeInUp heading-container">
-            <h1>
+            <h1 className="heading-main">
               {/* Introduction to */}
-              <span className="heading-intro-to">
+              <span className="heading-intro">
                 Introduction to
               </span>
               
-              {/* Artificial Intelligence with full curve underline */}
-              <div className="heading-ai-wrapper">
+              {/* Artificial Intelligence with curve underline */}
+              <span className="heading-ai-wrapper">
                 <span className={`${fuzzyBubblesBoldFont.className} heading-ai`}>
                   Artificial Intelligence
                 </span>
                 <span className={`${swashesFont.className} swash-underline`}>
                   z
                 </span>
-              </div>
+              </span>
             </h1>
 
             <p className="description-text text-gray-600 max-w-4xl mx-auto leading-relaxed font-normal">

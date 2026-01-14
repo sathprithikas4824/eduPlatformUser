@@ -1,6 +1,14 @@
 "use client";
 
 import React from 'react';
+// Import the fonts
+import localFont from "next/font/local";
+
+const fuzzyBubblesBoldFont = localFont({
+  src: "../../fonts/FuzzyBubbles-Bold.ttf",
+  display: "swap",
+  variable: "--font-fuzzy-bubbles-bold",
+});
 
 const Overview: React.FC = () => {
   return (
@@ -48,7 +56,7 @@ const Overview: React.FC = () => {
             </p>
 
             {/* Handwritten Note style */}
-            <p className="mt-6 italic text-purple-700 font-medium text-xl" style={{ fontFamily: 'cursive' }}>
+            <p className={`${fuzzyBubblesBoldFont.className} mt-6 italic text-purple-700 font-medium text-xl`} >
               Machines that can "think" for themselves!
             </p>
           </div>
@@ -88,7 +96,7 @@ const Overview: React.FC = () => {
               <ul className="list-disc ml-6 md:ml-8 text-lg md:text-xl font-medium text-gray-800 space-y-1">
                 <li>Can understand and learn any intellectual task</li>
                 <li className="relative inline-block">
-                  <span className="text-purple-700 italic border-b-2 border-purple-400" style={{ fontFamily: 'cursive' }}>
+                  <span className={`${fuzzyBubblesBoldFont.className} text-purple-700 italic border-b-2 border-purple-400`} >
                     Still theoretical!
                   </span>
                 </li>
