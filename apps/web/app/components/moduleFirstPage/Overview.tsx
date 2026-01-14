@@ -1,6 +1,7 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from "react";
+
 // Import the fonts
 import localFont from "next/font/local";
 
@@ -10,112 +11,199 @@ const fuzzyBubblesBoldFont = localFont({
   variable: "--font-fuzzy-bubbles-bold",
 });
 
+interface Module {
+  module_id: number;
+  category_id: number;
+  name: string;
+  title: string | null;
+  description: string | null;
+  image_url: string | null;
+  content?: string;
+  created_at: string;
+  updated_at: string;
+  deleted_at: string | null;
+}
+
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3000";
+const MODULE_ID = 17; // Module ID for AI content
+
 const Overview: React.FC = () => {
-  return (
-    // Background remains #D9D9D9 to match the source image
-    <div className="w-full min-h-screen bg-white jakarta-font py-8 md:py-12 px-4 md:px-6">
-      {/* RESPONSIVE STRATEGY:
-          - Mobile: Default padding, no extra left margin.
-          - Tablet (md): pl-16 to move it "righter".
-          - Desktop (lg): pl-32 for a distinct left-aligned look.
-      */}
-      <div className="max-w-6xl ml-0 md:pl-16 lg:pl-32 space-y-10 md:space-y-12">
-        
-        {/* Section 1: What is AI? */}
-        <section className="space-y-4 md:space-y-6">
-          <h1 className="text-3xl md:text-5xl font-extrabold text-black">
-            What is <span className="text-purple-600">AI</span> ?
-          </h1>
+  const [moduleData, setModuleData] = useState<Module | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-          <div className="relative text-lg md:text-2xl leading-relaxed text-gray-800">
-            <p className="inline-block">
-              <span className="text-purple-700 font-bold">Artificial Intelligence (AI)</span> is the simulation of{''}
-              <span className="relative inline-block px-2 md:px-4 mx-1">
-                human intelligence
-                {/* FIXED OVAL: 
-                    The viewBox and ellipse are now matched to ensure the stroke isn't cut off.
-                */}
-                <svg 
-                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[140%] text-gray-600 pointer-events-none" 
-                  viewBox="0 0 180 60" 
-                  preserveAspectRatio="none"
-                  fill="none"
-                >
-                  <ellipse 
-                    cx="90" 
-                    cy="30" 
-                    rx="85" 
-                    ry="25" 
-                    stroke="currentColor" 
-                    strokeWidth="2" 
-                  />
-                </svg>
-              </span>
-              {''} in machines that are programmed to{' '}
-              <span className="text-purple-600 font-medium">think, learn, and problem-solve</span> like humans.
-            </p>
+  useEffect(() => {
+    const fetchModule = async () => {
+      try {
+        setLoading(true);
 
-            {/* Handwritten Note style */}
-            <p className={`${fuzzyBubblesBoldFont.className} mt-6 italic text-purple-700 font-medium text-xl`} >
-              Machines that can "think" for themselves!
-            </p>
-          </div>
+        // Fetch module 17 directly
+        const response = await fetch(
+          `${BACKEND_URL}/api/modules/single/${MODULE_ID}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch module");
+        }
+        const data: Module = await response.json();
+        setModuleData(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "An error occurred");
+        console.error("Error fetching module:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-          {/* Purple Highlight Box */}
-          <div className="bg-purple-400/80 border-l-[6px] border-purple-600 p-5 md:p-8 rounded-r-xl shadow-sm max-w-4xl">
-            <p className="text-gray-900 font-semibold text-base md:text-xl leading-snug">
-              AI systems can perform tasks that typically require human intelligence: visual perception, 
-              speech recognition, decision-making, and language translation.
-            </p>
-          </div>
-        </section>
+    fetchModule();
+  }, []);
 
-        {/* Section 2: Three Main Types */}
-        <section className="space-y-6 md:space-y-8 pt-4">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-black">
-            Three Main Types of <span className="text-purple-600">AI</span> ?
-          </h2>
-
-          <div className="space-y-8 md:space-y-10">
-            {/* Narrow AI */}
-            <div className="space-y-2 md:space-y-3">
-              <h3 className="text-purple-700 text-xl md:text-2xl font-bold">
-                Narrow AI (Weak AI) <span className="text-gray-800 font-normal">- Designed for specific tasks</span>
-              </h3>
-              <ul className="list-disc ml-6 md:ml-8 text-lg md:text-xl font-medium text-gray-800 space-y-1">
-                <li>Virtual Assistants</li>
-                <li>Recommendation Systems</li>
-              </ul>
-            </div>
-
-            {/* General AI */}
-            <div className="space-y-2 md:space-y-3">
-              <h3 className="text-purple-700 text-xl md:text-2xl font-bold">
-                General AI (Strong AI) <span className="text-gray-800 font-normal">- Human level intelligence</span>
-              </h3>
-              <ul className="list-disc ml-6 md:ml-8 text-lg md:text-xl font-medium text-gray-800 space-y-1">
-                <li>Can understand and learn any intellectual task</li>
-                <li className="relative inline-block">
-                  <span className={`${fuzzyBubblesBoldFont.className} text-purple-700 italic border-b-2 border-purple-400`} >
-                    Still theoretical!
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Super AI */}
-            <div className="space-y-2 md:space-y-3">
-              <h3 className="text-purple-700 text-xl md:text-2xl font-bold">
-                Super AI <span className="text-gray-800 font-normal">- Beyond intelligence</span>
-              </h3>
-              <ul className="list-disc ml-6 md:ml-8 text-lg md:text-xl font-medium text-gray-800 space-y-1">
-                <li>Hypothetical future AI</li>
-              </ul>
-            </div>
-          </div>
-        </section>
-
+  if (loading) {
+    return (
+      <div className="w-full min-h-screen bg-white jakarta-font py-8 md:py-12 px-4 md:px-6 flex items-center justify-center">
+        <p className="text-xl text-gray-600">Loading...</p>
       </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="w-full min-h-screen bg-white jakarta-font py-8 md:py-12 px-4 md:px-6 flex items-center justify-center">
+        <p className="text-xl text-red-600">Error: {error}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={`w-full min-h-screen bg-white jakarta-font py-8 md:py-12 px-4 md:px-6 ${fuzzyBubblesBoldFont.variable}`}
+    >
+      <div className="max-w-6xl ml-0 md:pl-16 lg:pl-32 space-y-10 md:space-y-12">
+        {/* Display Module Content */}
+        {moduleData ? (
+          <div className="space-y-4">
+            {/* Module Title - "What is AI ?" */}
+            {moduleData.title && (
+              <div
+                className="ai-content-wrapper"
+                dangerouslySetInnerHTML={{ __html: moduleData.title }}
+              />
+            )}
+
+            {/* Module Description - Contains all HTML content */}
+            {moduleData.description && (
+              <div
+                className="ai-content-wrapper"
+                dangerouslySetInnerHTML={{ __html: moduleData.description }}
+              />
+            )}
+          </div>
+        ) : (
+          <div className="flex items-center justify-center py-20">
+            <p className="text-xl text-gray-500">No content found</p>
+          </div>
+        )}
+      </div>
+      <style jsx global>{`
+        .ai-content-wrapper {
+          font-family: "Plus Jakarta Sans", sans-serif;
+          color: #374151;
+        }
+
+        /* 1. THE OVAL / CIRCLED TEXT EFFECT */
+        .ai-content-wrapper .circled-text {
+          position: relative;
+          display: inline-block;
+          padding: 0 8px;
+          z-index: 1;
+        }
+
+        .ai-content-wrapper .circled-text::after {
+          content: "";
+          position: absolute;
+          left: -2px;
+          top: -2px;
+          right: -2px;
+          bottom: -2px;
+          border: 2px solid #9333ea; /* Purple color from your JSON */
+          border-radius: 50% 45% 55% 40% / 45% 55% 45% 55%; /* Irregular "hand-drawn" oval */
+          pointer-events: none;
+          z-index: -1;
+          transform: rotate(-1deg);
+        }
+
+        /* 2. THE HAND-DRAWN UNDERLINE EFFECT */
+        .ai-content-wrapper u {
+          text-decoration: none;
+          position: relative;
+          display: inline-block;
+          font-family: var(--font-fuzzy-bubbles-bold), cursive;
+        }
+
+        .ai-content-wrapper u::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 2px;
+          width: 100%;
+          height: 3px;
+          background-color: currentColor; /* Matches the text color automatically */
+          border-radius: 2px;
+          /* This makes the line look slightly wiggly/organic */
+          clip-path: polygon(
+            0% 20%,
+            25% 0%,
+            50% 30%,
+            75% 10%,
+            100% 40%,
+            100% 70%,
+            75% 90%,
+            50% 70%,
+            25% 100%,
+            0% 80%
+          );
+        }
+
+        /* Standard Styles */
+        .ai-content-wrapper h1,
+        .ai-content-wrapper h2 {
+          font-weight: 800;
+          margin-bottom: 0.5rem;
+        }
+
+        .ai-content-wrapper h1 {
+          font-size: 2.25rem;
+        }
+        .ai-content-wrapper h2 {
+          font-size: 1.85rem;
+          margin-top: 2.5rem;
+        }
+
+        .ai-content-wrapper h3 {
+          font-size: 1.15rem;
+          font-weight: 700;
+          margin-top: 1.5rem;
+          margin-bottom: 0.25rem;
+        }
+
+        .ai-content-wrapper p {
+          font-size: 1.05rem;
+          line-height: 1.6;
+          margin-bottom: 0.75rem;
+        }
+
+        .ai-content-wrapper mark {
+          background-color: #fef08a; /* Soft yellow highlight */
+          color: inherit;
+          padding: 0 2px;
+        }
+
+        .ai-content-wrapper ul {
+          list-style-type: disc;
+          margin-left: 1.5rem;
+          margin-top: 0.5rem;
+        }
+      `}</style>
     </div>
   );
 };
